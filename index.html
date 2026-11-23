@@ -1,0 +1,2029 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>彼安諾 & 大耳狗 30點專屬集點卡 ♡</title>
+  <!-- 載入 Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 載入圓潤可愛的日系字體 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Zen Maru Gothic', 'Quicksand', sans-serif;
+      background-color: #ffeaf2;
+      background-image:
+        radial-gradient(#ffffff 2.4px, transparent 2.4px),
+        radial-gradient(#ffd1e3 2.4px, #ffeaf2 2.4px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+      color: #5c4038;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .font-num {
+      font-family: 'Quicksand', 'Zen Maru Gothic', sans-serif;
+    }
+
+    /* 主卡片雙層草莓蕾絲邊框 */
+    .sanrio-card-frame {
+      background: linear-gradient(180deg, #fffdfd 0%, #fff5f9 100%);
+      border: 4px solid #ffc0d9;
+      box-shadow:
+        0 14px 32px -6px rgba(255, 118, 168, 0.25),
+        0 0 0 6px #ffffff,
+        0 0 0 9px #ffd8e8;
+    }
+
+    /* 角色舞台背景 */
+    .character-stage {
+      background:
+        radial-gradient(circle at 22% 24%, rgba(255, 255, 255, 0.95) 0%, transparent 45%),
+        radial-gradient(circle at 78% 24%, rgba(224, 245, 255, 0.9) 0%, transparent 45%),
+        linear-gradient(180deg, #ffe2ee 0%, #fff5f9 68%, #e6f5ff 100%);
+      border: 2.5px dashed #ff9ec2;
+    }
+
+    /* 正方形圓角外框集點格 */
+    .stamp-card-base {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: 16px;
+      transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .stamp-card-unstamped {
+      background: linear-gradient(180deg, #ffffff 0%, #fff6fa 100%);
+      border: 2px dashed #f5b8d0;
+      box-shadow: inset 0 2px 5px rgba(245, 165, 198, 0.15);
+    }
+
+    .stamp-card-unstamped:hover {
+      border-color: #ff7aa8;
+      background: #fff9fc;
+    }
+
+    .stamp-card-stamped-pink {
+      background: linear-gradient(180deg, #fff8fb 0%, #ffe6f0 100%);
+      border: 2px solid #f28fb2;
+      box-shadow:
+        0 4px 10px -2px rgba(242, 143, 178, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+
+    .stamp-card-stamped-blue {
+      background: linear-gradient(180deg, #f8fcff 0%, #e4f4ff 100%);
+      border: 2px solid #89c8ec;
+      box-shadow:
+        0 4px 10px -2px rgba(137, 200, 236, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+
+    .stamp-card-stamped-gold {
+      background: linear-gradient(180deg, #fffdf5 0%, #fff1cc 100%);
+      border: 2px solid #e8c56e;
+      box-shadow:
+        0 4px 12px -2px rgba(232, 197, 110, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+
+    /* ================= 三麗鷗角色生動動畫 ================= */
+
+    /* 彼安諾整體Q彈呼吸與左右輕晃 */
+    @keyframes pianoSway {
+      0%, 100% {
+        transform: translateY(0px) rotate(-1.5deg);
+      }
+      50% {
+        transform: translateY(-3.5px) rotate(1.8deg);
+      }
+    }
+    .anim-piano-body {
+      transform-origin: 102px 134px;
+      animation: pianoSway 2.8s ease-in-out infinite;
+    }
+
+    /* 彼安諾小羊耳輕輕抖動 */
+    @keyframes pianoEarLeft {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(6deg); }
+    }
+    @keyframes pianoEarRight {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(-6deg); }
+    }
+    .anim-piano-ear-l {
+      transform-origin: 65px 56px;
+      animation: pianoEarLeft 2.4s ease-in-out infinite;
+    }
+    .anim-piano-ear-r {
+      transform-origin: 139px 56px;
+      animation: pianoEarRight 2.4s ease-in-out infinite;
+    }
+
+    /* 大耳狗漂浮上下彈動 */
+    @keyframes cinnaFloat {
+      0%, 100% {
+        transform: translateY(0px) rotate(1deg);
+      }
+      50% {
+        transform: translateY(-5px) rotate(-1.2deg);
+      }
+    }
+    .anim-cinna-body {
+      transform-origin: 254px 134px;
+      animation: cinnaFloat 2.6s ease-in-out infinite;
+    }
+
+    /* 大耳狗招牌長耳朵像翅膀一樣上下拍動 */
+    @keyframes cinnaEarFlapL {
+      0%, 100% { transform: rotate(0deg); }
+      40% { transform: rotate(-11deg); }
+      75% { transform: rotate(4deg); }
+    }
+    @keyframes cinnaEarFlapR {
+      0%, 100% { transform: rotate(0deg); }
+      40% { transform: rotate(11deg); }
+      75% { transform: rotate(-4deg); }
+    }
+    .anim-cinna-ear-l {
+      transform-origin: 222px 52px;
+      animation: cinnaEarFlapL 2.2s ease-in-out infinite;
+    }
+    .anim-cinna-ear-r {
+      transform-origin: 286px 52px;
+      animation: cinnaEarFlapR 2.2s ease-in-out infinite;
+    }
+
+    /* 肉桂捲尾巴微微搖擺 */
+    @keyframes cinnaTailWag {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(-9deg); }
+    }
+    .anim-cinna-tail {
+      transform-origin: 238px 104px;
+      animation: cinnaTailWag 1.8s ease-in-out infinite;
+    }
+
+    /* 可愛自然眨眼動畫 */
+    @keyframes cuteBlink {
+      0%, 46%, 50%, 94%, 100% {
+        transform: scaleY(1);
+      }
+      48%, 96% {
+        transform: scaleY(0.08);
+      }
+    }
+    .anim-blink-piano {
+      transform-origin: 102px 66px;
+      animation: cuteBlink 4.2s infinite;
+    }
+    .anim-blink-cinna {
+      transform-origin: 254px 63px;
+      animation: cuteBlink 3.7s infinite 1.2s;
+    }
+
+    /* 中央愛心撲通跳動 */
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1) translateY(0px); }
+      25% { transform: scale(1.22) translateY(-2px); }
+      50% { transform: scale(0.96) translateY(0px); }
+      75% { transform: scale(1.15) translateY(-1.5px); }
+    }
+    .anim-heart-beat {
+      transform-origin: 179px 68px;
+      animation: heartPulse 1.9s ease-in-out infinite;
+    }
+
+    /* 地面影子隨跳動縮放 */
+    @keyframes shadowPulse {
+      0%, 100% { transform: scaleX(1); opacity: 0.45; }
+      50% { transform: scaleX(0.84); opacity: 0.28; }
+    }
+    .anim-shadow-l {
+      transform-origin: 102px 136px;
+      animation: shadowPulse 2.8s ease-in-out infinite;
+    }
+    .anim-shadow-r {
+      transform-origin: 254px 136px;
+      animation: shadowPulse 2.6s ease-in-out infinite;
+    }
+
+    /* 點擊角色或蓋章時的開心大跳躍特效 */
+    @keyframes happyJump {
+      0% { transform: translateY(0) scale(1, 1); }
+      25% { transform: translateY(3px) scale(1.08, 0.92); }
+      55% { transform: translateY(-14px) scale(0.95, 1.06); }
+      80% { transform: translateY(0) scale(1.04, 0.96); }
+      100% { transform: translateY(0) scale(1, 1); }
+    }
+    .character-jump {
+      animation: happyJump 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    }
+
+    /* 蓋章彈跳動畫 */
+    @keyframes bowPop {
+      0% {
+        transform: scale(0.35) rotate(-14deg);
+        opacity: 0.3;
+      }
+      60% {
+        transform: scale(1.16) rotate(4deg);
+        opacity: 1;
+      }
+      82% {
+        transform: scale(0.95) rotate(-2deg);
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    .bow-pop {
+      animation: bowPop 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    /* 慶祝蝴蝶結與愛心飄落特效 */
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg) scale(0.85);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(108vh) rotate(540deg) scale(1.1);
+        opacity: 0;
+      }
+    }
+
+    .confetti-item {
+      position: fixed;
+      top: -40px;
+      pointer-events: none;
+      z-index: 60;
+      animation-name: confettiFall;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+    }
+
+    /* ================= 華麗夢幻蓋章魔法特效 ================= */
+    @keyframes stampHaloExpand {
+      0% {
+        transform: scale(0.45);
+        opacity: 0.95;
+      }
+      100% {
+        transform: scale(1.75);
+        opacity: 0;
+      }
+    }
+    .stamp-halo-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      pointer-events: none;
+      z-index: 20;
+      animation: stampHaloExpand 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes stampParticleBurst {
+      0% {
+        transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+        opacity: 1;
+      }
+      70% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.15) rotate(var(--rot));
+        opacity: 0;
+      }
+    }
+    .stamp-particle {
+      position: fixed;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      z-index: 70;
+      user-select: none;
+      filter: drop-shadow(0 2px 4px rgba(255, 105, 158, 0.35));
+      animation: stampParticleBurst 0.78s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes plusOneFloatUp {
+      0% {
+        transform: translate(-50%, 0) scale(0.6);
+        opacity: 0;
+      }
+      25% {
+        transform: translate(-50%, -10px) scale(1.15);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -36px) scale(0.95);
+        opacity: 0;
+      }
+    }
+    .stamp-float-badge {
+      position: fixed;
+      pointer-events: none;
+      z-index: 75;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff7aa8, #87c9f5);
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 12px;
+      border: 1.5px solid #ffffff;
+      box-shadow: 0 4px 10px rgba(255, 92, 151, 0.4);
+      animation: plusOneFloatUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes bowShimmer {
+      0%, 100% { filter: drop-shadow(0 2px 3px rgba(255, 122, 168, 0.22)); }
+      50% { filter: drop-shadow(0 3px 7px rgba(255, 122, 168, 0.48)); }
+    }
+    .bow-shimmer-glow {
+      animation: bowShimmer 3s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start py-4 px-3 sm:py-7 sm:px-4 overflow-x-hidden">
+
+  <!-- 飄落慶祝容器 -->
+  <div id="confetti-container" aria-hidden="true"></div>
+
+  <!-- 頂部浮動通知氣泡 -->
+  <div
+    id="toast-banner"
+    role="status"
+    class="fixed top-4 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 -translate-y-4 transition-all duration-300 max-w-[92vw] w-max px-4 py-2.5 rounded-full bg-white/95 border-2 border-[#ff9ec2] shadow-lg flex items-center gap-2 text-xs sm:text-sm font-bold text-[#5c4038]"
+  >
+    <span id="toast-icon">🎀</span>
+    <span id="toast-msg">已同步最新進度</span>
+  </div>
+
+  <!-- 頂部雙人雲端同步與密碼鎖狀態列 -->
+  <header class="w-full max-w-md mb-4 px-3.5 py-2.5 rounded-2xl bg-white/90 backdrop-blur-xs border-2 border-pink-200 shadow-sm flex items-center justify-between gap-2">
+    <div class="flex items-center gap-2 min-w-0">
+      <span id="sync-dot" class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse shrink-0"></span>
+      <div class="truncate">
+        <p id="sync-status-text" class="text-[11px] font-bold text-[#a65272] truncate">☁️ 正在連線雲端...</p>
+        <p class="text-[10px] font-bold text-pink-400 truncate">代碼：<span id="room-code-display" class="font-num text-[#ff4788]">PIANO-0000</span></p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-1.5 shrink-0">
+      <button
+        id="pin-lock-btn"
+        type="button"
+        title="設定發點密碼鎖"
+        class="px-2.5 py-1.5 rounded-xl bg-pink-50 hover:bg-pink-100 border border-pink-200 text-[#c9386e] text-xs font-extrabold transition-colors flex items-center gap-1"
+      >
+        <span id="pin-lock-icon">🔓</span>
+        <span id="pin-lock-label">未上鎖</span>
+      </button>
+
+      <button
+        id="open-sync-btn"
+        type="button"
+        class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-[#ff7aa8] to-[#ff5593] text-white text-xs font-extrabold shadow-xs hover:opacity-95 transition-opacity flex items-center gap-1"
+      >
+        <span>🔗</span>
+        <span>同步代碼</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 集點卡主體外框 -->
+  <main class="w-full max-w-md sanrio-card-frame rounded-[32px] p-4 sm:p-6 relative">
+    <!-- 頂部裝飾小緞帶標籤 -->
+    <div class="flex justify-center -mt-7 sm:-mt-9 mb-2">
+      <span class="px-4 py-1 rounded-full bg-gradient-to-r from-[#ff85b3] via-[#ff699e] to-[#87c9f5] text-white text-[11px] sm:text-xs font-extrabold tracking-wider shadow-sm border-2 border-white">
+        ♡ MY SWEET PIANO × CINNAMOROLL ♡
+      </span>
+    </div>
+
+    <!-- 可點擊編輯的主標題區 -->
+    <div class="flex items-center justify-center gap-1.5 mb-3">
+      <h1
+        id="card-title"
+        title="點擊修改集點卡標題"
+        class="text-lg sm:text-xl font-black text-center text-[#5c4038] tracking-tight cursor-pointer hover:text-[#ff4788] transition-colors leading-snug"
+      >
+        彼安諾 & 大耳狗 專屬集點卡
+      </h1>
+      <button
+        id="edit-title-btn"
+        type="button"
+        aria-label="修改集點卡標題"
+        class="p-1.5 rounded-full bg-pink-50 hover:bg-pink-100 text-[#ff5c97] transition-colors shrink-0"
+      >
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9" />
+          <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- 彼安諾 & 大耳狗 動態三麗鷗插畫舞台（可點擊互動跳躍！） -->
+    <section
+      id="interactive-stage"
+      title="點一下彼安諾或大耳狗看看反應吧 ♡"
+      class="character-stage rounded-3xl p-2.5 sm:p-3 mb-4 relative overflow-hidden cursor-pointer select-none"
+    >
+      <div class="flex justify-between items-center text-[11px] font-bold text-[#c96a8e] px-1 mb-0.5">
+        <span>🌸 My Sweet Piano</span>
+        <span class="px-2 py-0.5 rounded-full bg-white/85 text-[#ff5593] text-[10px] border border-pink-200">點點我們互動 ♡</span>
+        <span class="text-[#4f86b5]">Cinnamoroll ☁️</span>
+      </div>
+
+      <!-- 高還原度三麗鷗動態雙角色原畫 -->
+      <div class="w-full flex justify-center items-center">
+        <svg class="w-full max-w-[348px] h-auto overflow-visible" viewBox="0 0 360 152" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="pianoWoolGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#FFD8E8" />
+              <stop offset="65%" stop-color="#FFC0DA" />
+              <stop offset="100%" stop-color="#FCA8CA" />
+            </linearGradient>
+            <linearGradient id="cinnaBodyGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#FFFFFF" />
+              <stop offset="85%" stop-color="#F7FCFF" />
+              <stop offset="100%" stop-color="#E6F4FF" />
+            </linearGradient>
+          </defs>
+
+          <!-- 地面動態投影 -->
+          <ellipse class="anim-shadow-l" cx="102" cy="136" rx="34" ry="4.8" fill="#F4B2CC" />
+          <ellipse class="anim-shadow-r" cx="254" cy="136" rx="38" ry="4.8" fill="#B2DCF7" />
+
+          <!-- ==================== 左側：彼安諾 My Sweet Piano ==================== -->
+          <g id="piano-actor" class="anim-piano-body">
+            <!-- 圓滾滾蓬鬆羊毛小身體與短腿 -->
+            <path
+              d="M90 90C85 93 84 100 86 106C84 111 86 116 90 118V127C90 130 96 130 96 127V121H108V127C108 130 114 130 114 127V118C118 116 120 111 118 106C120 100 119 93 114 90"
+              fill="url(#pianoWoolGrad)"
+              stroke="#7A564D"
+              stroke-width="2.2"
+              stroke-linejoin="round"
+            />
+            <!-- 左側探出的蓬鬆羊毛小尾巴 -->
+            <path
+              d="M85 107C79 106 76 111 79 115C81 118 85 117 87 115"
+              fill="url(#pianoWoolGrad)"
+              stroke="#7A564D"
+              stroke-width="2.1"
+              stroke-linecap="round"
+            />
+
+            <!-- 兩側下垂小羊耳 -->
+            <path
+              class="anim-piano-ear-l"
+              d="M65 56C51 60 44 73 49 80C54 86 65 80 71 70"
+              fill="#FFD5E6"
+              stroke="#7A564D"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              class="anim-piano-ear-r"
+              d="M139 56C153 60 160 73 155 80C150 86 139 80 133 70"
+              fill="#FFD5E6"
+              stroke="#7A564D"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+
+            <!-- 超大朵棉花糖雲朵捲毛頭 -->
+            <path
+              d="M62 58C52 54 48 43 54 34C54 21 67 14 79 18C86 10 99 8 106 15C114 8 127 10 133 19C145 16 156 23 155 35C161 44 156 55 146 58C150 67 146 78 137 82C132 89 123 92 114 90H90C81 92 72 89 67 82C58 78 54 67 62 58Z"
+              fill="url(#pianoWoolGrad)"
+              stroke="#7A564D"
+              stroke-width="2.2"
+              stroke-linejoin="round"
+            />
+
+            <!-- 頭頂迷你三麗鷗小花點綴 -->
+            <g transform="translate(74, 24)">
+              <circle cx="0" cy="-3.2" r="2.3" fill="#FFFDF5" stroke="#7A564D" stroke-width="1.2" />
+              <circle cx="3" cy="-1" r="2.3" fill="#FFFDF5" stroke="#7A564D" stroke-width="1.2" />
+              <circle cx="1.9" cy="2.6" r="2.3" fill="#FFFDF5" stroke="#7A564D" stroke-width="1.2" />
+              <circle cx="-1.9" cy="2.6" r="2.3" fill="#FFFDF5" stroke="#7A564D" stroke-width="1.2" />
+              <circle cx="-3" cy="-1" r="2.3" fill="#FFFDF5" stroke="#7A564D" stroke-width="1.2" />
+              <circle cx="0" cy="0" r="1.8" fill="#FFD166" />
+            </g>
+
+            <!-- 奶油白小羊臉龐 -->
+            <path
+              d="M71 63C71 50 82 44 93 48C98 44 106 44 111 48C122 44 133 50 133 63C133 77 120 87 102 87C84 87 71 77 71 63Z"
+              fill="#FFFDFB"
+              stroke="#7A564D"
+              stroke-width="2.1"
+              stroke-linejoin="round"
+            />
+
+            <!-- 會眨眼的溫柔可可棕橢圓大眼睛 -->
+            <g class="anim-blink-piano">
+              <ellipse cx="87.5" cy="65" rx="3.1" ry="4.2" fill="#5C4038" />
+              <circle cx="86.6" cy="63.5" r="1.1" fill="#FFFFFF" />
+              <ellipse cx="116.5" cy="65" rx="3.1" ry="4.2" fill="#5C4038" />
+              <circle cx="115.6" cy="63.5" r="1.1" fill="#FFFFFF" />
+            </g>
+
+            <!-- 粉嫩橢圓腮紅 -->
+            <ellipse cx="80" cy="72" rx="5.2" ry="3" fill="#FFA4C6" fill-opacity="0.68" />
+            <ellipse cx="124" cy="72" rx="5.2" ry="3" fill="#FFA4C6" fill-opacity="0.68" />
+
+            <!-- 迷你小鼻子與微笑嘴型 -->
+            <ellipse cx="102" cy="70.5" rx="2.3" ry="1.6" fill="#FFD166" stroke="#7A564D" stroke-width="1.3" />
+            <path d="M98.8 74.5C100.5 76.3 103.5 76.3 105.2 74.5" stroke="#7A564D" stroke-width="1.8" stroke-linecap="round" />
+
+            <!-- 招牌害羞撒嬌小羊手 -->
+            <path
+              d="M104 86C100 86 98 90 100 94C102 97 107 97 109 93C111 89 108 86 104 86Z"
+              fill="#FFFDFB"
+              stroke="#7A564D"
+              stroke-width="2"
+            />
+            <path
+              d="M88 97C84 100 85 106 90 107C93 107 95 104 94 101"
+              fill="#FFD8E8"
+              stroke="#7A564D"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </g>
+
+          <!-- 中央撲通跳動的小愛心 -->
+          <g class="anim-heart-beat">
+            <path
+              d="M179 76C179 76 170 69.5 170 64C170 61 172.5 59 175.3 59C177.1 59 178.4 60 179 61.2C179.6 60 180.9 59 182.7 59C185.5 59 188 61 188 64C188 69.5 179 76 179 76Z"
+              fill="#FF82B2"
+              stroke="#7A564D"
+              stroke-width="1.6"
+            />
+          </g>
+
+          <!-- ==================== 右側：大耳狗喜拿 Cinnamoroll ==================== -->
+          <g id="cinna-actor" class="anim-cinna-body">
+            <!-- 招牌水平展開微垂長耳朵（左長耳） -->
+            <path
+              class="anim-cinna-ear-l"
+              d="M222 49C201 45 179 53 175 66C172 75 182 81 195 78C207 75 216 67 222 60"
+              fill="url(#cinnaBodyGrad)"
+              stroke="#9A7B68"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+
+            <!-- 招牌水平展開微垂長耳朵（右長耳） -->
+            <path
+              class="anim-cinna-ear-r"
+              d="M286 49C307 45 329 53 333 66C336 75 326 81 313 78C301 75 292 67 286 60"
+              fill="url(#cinnaBodyGrad)"
+              stroke="#9A7B68"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+
+            <!-- 捲捲肉桂尾巴 -->
+            <path
+              class="anim-cinna-tail"
+              d="M238 104C227 102 221 108 224 115C227 121 235 121 238 115C240 111 236 108 232 110"
+              fill="#FFFFFF"
+              stroke="#9A7B68"
+              stroke-width="2.1"
+              stroke-linecap="round"
+            />
+
+            <!-- 圓滾滾嬌小白色身體與短腿 -->
+            <path
+              d="M240 84C234 89 233 101 237 110C239 114 242 116 245 117V126C245 129 251 129 251 126V121H257V126C257 129 263 129 263 126V117C266 116 269 114 271 110C275 101 274 89 268 84"
+              fill="url(#cinnaBodyGrad)"
+              stroke="#9A7B68"
+              stroke-width="2.2"
+              stroke-linejoin="round"
+            />
+
+            <!-- 大耳狗正版寬扁棉花糖大頭 -->
+            <path
+              d="M216 59C216 40 233 33 254 33C275 33 292 40 292 59C292 76 276 86 254 86C232 86 216 76 216 59Z"
+              fill="url(#cinnaBodyGrad)"
+              stroke="#9A7B68"
+              stroke-width="2.2"
+              stroke-linejoin="round"
+            />
+
+            <!-- 會眨眼的低眼位水藍色橢圓大眼睛 -->
+            <g class="anim-blink-cinna">
+              <ellipse cx="235" cy="63" rx="3.7" ry="4.9" fill="#59ADE6" />
+              <circle cx="234" cy="61" r="1.3" fill="#FFFFFF" />
+              <ellipse cx="273" cy="63" rx="3.7" ry="4.9" fill="#59ADE6" />
+              <circle cx="272" cy="61" r="1.3" fill="#FFFFFF" />
+            </g>
+
+            <!-- 粉嫩橢圓腮紅 -->
+            <ellipse cx="226" cy="70.5" rx="6" ry="3.3" fill="#FFA6C9" fill-opacity="0.72" />
+            <ellipse cx="282" cy="70.5" rx="6" ry="3.3" fill="#FFA6C9" fill-opacity="0.72" />
+
+            <!-- 經典「ω」彎彎微笑小嘴 -->
+            <path
+              d="M248.5 67.5C248.5 70.5 253.8 70.5 254 67.8C254.2 70.5 259.5 70.5 259.5 67.5"
+              stroke="#59ADE6"
+              stroke-width="2.1"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+
+            <!-- 招牌小短手合在胸前 -->
+            <path
+              d="M242 89C245 87 251 89 252 94C253 98 249 101 245 99C242 97 241 93 242 89Z"
+              fill="#FFFFFF"
+              stroke="#9A7B68"
+              stroke-width="2"
+            />
+            <path
+              d="M266 89C263 87 257 89 256 94C255 98 259 101 263 99C266 97 267 93 266 89Z"
+              fill="#FFFFFF"
+              stroke="#9A7B68"
+              stroke-width="2"
+            />
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 集點進度條與百分比區 -->
+    <section class="rounded-2xl bg-pink-50/85 border-2 border-pink-200/90 p-3 sm:p-3.5 mb-4">
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <p id="points-text" class="text-xs sm:text-sm font-extrabold text-[#5c4038] flex items-center gap-1">
+          <span>🎀</span> 目前累積：<span class="font-num text-base sm:text-lg font-bold text-[#ff4788]">0</span> / 30 點
+        </p>
+        <span id="percent-badge" class="font-num px-2.5 py-0.5 rounded-full bg-gradient-to-r from-[#ff7aa8] to-[#ff4d8d] text-white text-xs font-extrabold shadow-xs">
+          0%
+        </span>
+      </div>
+
+      <!-- 草莓糖霜進度條 -->
+      <div class="w-full h-3.5 rounded-full bg-white border border-pink-200 p-0.5 overflow-hidden shadow-inner">
+        <div
+          id="progress-bar"
+          style="width: 0%"
+          class="h-full rounded-full bg-gradient-to-r from-[#ff9ec2] via-[#ff699e] to-[#7cc2f2] transition-all duration-500 ease-out"
+        ></div>
+      </div>
+
+      <p id="encouragement-text" class="text-[11px] sm:text-xs font-bold text-[#b85d80] text-center mt-2">
+        ✨ 點擊下方精緻蝴蝶結或「＋1 點蓋章」開始集點吧！
+      </p>
+    </section>
+
+    <!-- 30 個正方形圓角外框絲緞蝴蝶結集點格 (5欄 × 6列) -->
+    <section aria-label="30點蝴蝶結集點格" class="mb-4">
+      <div id="stamp-grid" class="grid grid-cols-5 gap-2 sm:gap-2.5"></div>
+    </section>
+
+    <!-- 底部操作按鈕區 -->
+    <section class="space-y-2.5">
+      <div class="grid grid-cols-3 gap-2">
+        <button
+          id="minus-btn"
+          type="button"
+          class="py-2.5 px-2 rounded-2xl bg-pink-50 hover:bg-pink-100 active:scale-95 border-2 border-pink-200 text-[#c9386e] font-extrabold text-xs sm:text-sm transition-all"
+        >
+          －1 扣點
+        </button>
+
+        <button
+          id="plus-btn"
+          type="button"
+          class="col-span-2 py-2.5 px-3 rounded-2xl bg-gradient-to-r from-[#ff7aa8] via-[#ff5c97] to-[#ff4788] hover:opacity-95 active:scale-95 text-white font-extrabold text-sm sm:text-base shadow-md shadow-pink-300/50 transition-all flex items-center justify-center gap-1.5"
+        >
+          <span>🎀</span>
+          <span>＋1 點蓋章</span>
+        </button>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button
+          id="open-reward-btn"
+          type="button"
+          class="flex-1 py-2.5 px-3 rounded-2xl bg-gradient-to-r from-[#fff3f8] to-[#eef8ff] hover:from-[#ffe8f1] hover:to-[#e0f3ff] active:scale-95 border-2 border-[#ff9ec2] text-[#c9386e] font-extrabold text-xs sm:text-sm shadow-xs transition-all flex items-center justify-center gap-1.5"
+        >
+          <span>🎁</span>
+          <span id="reward-btn-label">查看三麗鷗獎勵券 (0/30)</span>
+        </button>
+
+        <button
+          id="reset-btn"
+          type="button"
+          title="歸零重來"
+          class="py-2.5 px-3 rounded-2xl bg-white hover:bg-pink-50 active:scale-95 border-2 border-pink-200 text-[#b85d80] font-extrabold text-xs transition-all shrink-0"
+        >
+          ↺ 歸零
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- 通用輸入與確認彈窗 -->
+  <div id="custom-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-pink-950/35 backdrop-blur-xs p-4">
+    <div class="w-full max-w-xs rounded-[26px] bg-white border-4 border-[#ffc2da] p-5 shadow-2xl text-center">
+      <div id="modal-emoji" class="text-3xl mb-1.5">🎀</div>
+      <h2 id="modal-title" class="text-base font-extrabold text-[#5c4038] mb-1">標題</h2>
+      <p id="modal-desc" class="text-xs font-bold text-[#9c6679] mb-3.5 leading-relaxed">說明文字</p>
+      <input
+        id="modal-input"
+        type="text"
+        maxlength="28"
+        class="hidden w-full px-3.5 py-2.5 rounded-2xl border-2 border-pink-200 focus:border-[#ff699e] focus:outline-none text-center font-bold text-base text-[#5c4038] bg-pink-50/50 mb-4"
+      />
+      <div class="flex gap-2">
+        <button id="modal-cancel" type="button" class="flex-1 py-2.5 rounded-2xl bg-pink-50 hover:bg-pink-100 text-[#a65272] font-extrabold text-sm transition-colors">
+          取消
+        </button>
+        <button id="modal-confirm" type="button" class="flex-1 py-2.5 rounded-2xl bg-gradient-to-r from-[#ff7aa8] to-[#ff5593] text-white font-extrabold text-sm shadow-sm hover:opacity-95 transition-opacity">
+          確定
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 三麗鷗獎勵兌換券彈窗 -->
+  <div id="reward-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-pink-950/35 backdrop-blur-xs p-4">
+    <div class="relative w-full max-w-sm rounded-[28px] bg-gradient-to-b from-[#fff5f9] to-[#ffffff] border-4 border-[#ffc2da] p-5 shadow-2xl">
+      <button id="close-reward-modal" type="button" aria-label="關閉獎勵視窗" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-pink-100 hover:bg-pink-200 text-[#c9386e] font-extrabold flex items-center justify-center transition-colors">
+        ✕
+      </button>
+
+      <div class="text-center mb-3">
+        <span class="inline-block px-3 py-1 rounded-full bg-pink-100 text-[#ff4788] text-xs font-extrabold tracking-wide mb-1">
+          🎀 SANRIO SPECIAL REWARD 🎀
+        </span>
+        <h2 class="text-lg font-extrabold text-[#5c4038]">彼安諾 & 大耳狗 專屬兌換券</h2>
+        <p id="reward-status-sub" class="text-xs font-bold text-[#a65272] mt-0.5">目前進度 0 / 30 點，集滿即可兌換喔！</p>
+      </div>
+
+      <!-- 票券卡片本體 -->
+      <div class="relative rounded-2xl bg-gradient-to-br from-[#ffe6f0] via-[#fff8fb] to-[#e6f6ff] border-2 border-dashed border-[#ff8bb6] p-4 my-3 text-center overflow-hidden">
+        <div class="flex justify-center items-center gap-2 text-2xl mb-1.5">
+          <span>🐑</span><span>🎀</span><span>🐶</span>
+        </div>
+        <p id="reward-content-text" class="text-base font-extrabold text-[#5c4038] leading-snug break-words px-2">
+          彼安諾 / 大耳狗三麗鷗任選禮物兌換券 🎁
+        </p>
+
+        <button id="edit-reward-text-btn" type="button" class="mt-2.5 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/85 hover:bg-white border border-pink-200 text-[11px] font-bold text-[#c9386e] transition-colors">
+          ✏️ 修改獎勵內容
+        </button>
+
+        <!-- 已兌換印章 -->
+        <div id="redeemed-stamp" class="hidden mt-3 pt-2.5 border-t border-pink-200/80">
+          <span class="inline-block px-3 py-0.5 rounded-full bg-rose-500 text-white text-xs font-extrabold tracking-wider shadow-xs">
+            💮 已兌換完成 REDEEMED
+          </span>
+          <p id="redeemed-date-text" class="font-num text-[11px] font-bold text-[#a65272] mt-1"></p>
+        </div>
+      </div>
+
+      <button id="redeem-now-btn" type="button" disabled class="w-full py-3 rounded-2xl bg-gradient-to-r from-[#ff7aa8] to-[#ff4d8d] disabled:from-pink-200 disabled:to-pink-200 disabled:text-pink-400 text-white font-extrabold text-sm shadow-md transition-all active:scale-95">
+        🔒 還差 30 個蝴蝶結解鎖
+      </button>
+    </div>
+  </div>
+
+  <!-- 雙人雲端同步與分享代碼視窗 -->
+  <div id="sync-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-pink-950/35 backdrop-blur-xs p-4">
+    <div class="relative w-full max-w-sm rounded-[28px] bg-[#fff9fc] border-4 border-[#ffc2da] p-5 shadow-2xl">
+      <button id="close-sync-modal" type="button" aria-label="關閉同步視窗" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-pink-100 hover:bg-pink-200 text-[#c9386e] font-extrabold flex items-center justify-center transition-colors">
+        ✕
+      </button>
+
+      <div class="text-center mb-3">
+        <div class="text-3xl mb-1">☁️🎀</div>
+        <h2 class="text-lg font-extrabold text-[#5c4038]">雙人雲端即時同步</h2>
+        <p class="text-xs font-bold text-[#9c6679] mt-0.5">把專屬代碼或連結傳給對方，兩人手機就能即時看到最新點數！</p>
+      </div>
+
+      <!-- 目前卡片代碼區 -->
+      <div class="rounded-2xl bg-pink-50/90 border-2 border-pink-200 p-3.5 text-center mb-3">
+        <p class="text-[11px] font-bold text-[#b85d80] mb-1">目前的專屬集點卡代碼</p>
+        <div id="modal-current-code" class="font-num text-xl font-extrabold tracking-wider text-[#ff4788] mb-2.5">
+          PIANO-0000
+        </div>
+        <div class="flex gap-2">
+          <button id="copy-code-btn" type="button" class="flex-1 py-2 px-2.5 rounded-xl bg-white hover:bg-pink-100 border border-pink-200 text-[#c9386e] text-xs font-extrabold transition-colors">
+            📋 複製代碼
+          </button>
+          <button id="copy-link-btn" type="button" class="flex-1 py-2 px-2.5 rounded-xl bg-gradient-to-r from-[#ff7aa8] to-[#ff5593] text-white text-xs font-extrabold shadow-xs hover:opacity-95 transition-opacity">
+            🔗 複製分享連結
+          </button>
+        </div>
+      </div>
+
+      <!-- 輸入對方代碼連線區 -->
+      <div class="rounded-2xl bg-sky-50/70 border border-sky-200 p-3 mb-3">
+        <p class="text-[11px] font-bold text-[#4b7496] mb-1.5">輸入對方的代碼以連線同一張卡：</p>
+        <div class="flex gap-2">
+          <input
+            id="join-code-input"
+            type="text"
+            maxlength="12"
+            placeholder="例如：PIANO-8821"
+            class="font-num flex-1 px-3 py-2 rounded-xl border-2 border-pink-200 focus:border-[#ff699e] focus:outline-none text-base font-bold uppercase text-center text-[#5c4038] bg-white"
+          />
+          <button id="join-code-btn" type="button" class="px-3.5 py-2 rounded-xl bg-[#7cc2f2] hover:bg-[#66b6ed] text-white text-xs font-extrabold transition-colors shrink-0">
+            連線
+          </button>
+        </div>
+      </div>
+
+      <button id="create-new-room-btn" type="button" class="w-full py-2 rounded-xl bg-pink-50 hover:bg-pink-100 text-[#b85d80] text-xs font-bold transition-colors">
+        ✨ 建立一張全新的空白集點卡代碼
+      </button>
+    </div>
+  </div>
+
+  <!-- 雙模即時雲端同步（Firebase 自動偵測 + 外部靜態部署免設定雲端備援 + 本機儲存） -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    /**
+     * 彼安諾 & 大耳狗 30點專屬集點卡（動態角色互動＋華麗蓋章重播＋雲端同步完整版）
+     */
+    (async function () {
+      const TOTAL_POINTS = 30;
+      const STORAGE_PREFIX = 'piano_cinna_card_v5_';
+      const PUBLIC_KV_ENDPOINT = 'https://kvdb.io/A9x7kP2mQ8wR4nL6vB3zT1';
+      const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+      let firebaseConfig = null;
+      try {
+        if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+          firebaseConfig = typeof __firebase_config === 'string'
+            ? JSON.parse(__firebase_config)
+            : __firebase_config;
+        }
+      } catch (e) {
+        firebaseConfig = null;
+      }
+
+      const defaultState = {
+        points: 0,
+        title: '彼安諾 & 大耳狗 專屬集點卡',
+        rewardText: '彼安諾 / 大耳狗三麗鷗任選禮物兌換券 🎁',
+        redeemed: false,
+        redeemedAt: null,
+        pinCode: '',
+        updatedAt: 0,
+        updatedBy: ''
+      };
+
+      const deviceId = (() => {
+        try {
+          let id = localStorage.getItem(`${STORAGE_PREFIX}device_id`);
+          if (!id) {
+            id = 'dev_' + Math.random().toString(36).slice(2, 11);
+            localStorage.setItem(`${STORAGE_PREFIX}device_id`, id);
+          }
+          return id;
+        } catch (e) {
+          return 'dev_' + Math.random().toString(36).slice(2, 11);
+        }
+      })();
+
+      let state = { ...defaultState };
+      let currentUser = null;
+      let db = null;
+      let auth = null;
+      let syncMode = 'local';
+      let unsubscribeRoom = null;
+      let pollTimer = null;
+      let currentRoomCode = '';
+      let isPinUnlockedThisSession = false;
+      let toastTimer = null;
+      let celebrated30 = false;
+      let replayTimers = [];
+      let hasPlayedInitialReplay = false;
+
+      // 取得所有 DOM 元素
+      const syncDotEl = document.getElementById('sync-dot');
+      const syncStatusTextEl = document.getElementById('sync-status-text');
+      const roomCodeDisplayEl = document.getElementById('room-code-display');
+      const pinLockBtn = document.getElementById('pin-lock-btn');
+      const pinLockIconEl = document.getElementById('pin-lock-icon');
+      const pinLockLabelEl = document.getElementById('pin-lock-label');
+      const openSyncBtn = document.getElementById('open-sync-btn');
+
+      const cardTitleEl = document.getElementById('card-title');
+      const editTitleBtn = document.getElementById('edit-title-btn');
+      const interactiveStageEl = document.getElementById('interactive-stage');
+      const pianoActorEl = document.getElementById('piano-actor');
+      const cinnaActorEl = document.getElementById('cinna-actor');
+
+      const pointsTextEl = document.getElementById('points-text');
+      const percentBadgeEl = document.getElementById('percent-badge');
+      const progressBarEl = document.getElementById('progress-bar');
+      const encouragementTextEl = document.getElementById('encouragement-text');
+      const stampGridEl = document.getElementById('stamp-grid');
+
+      const minusBtn = document.getElementById('minus-btn');
+      const plusBtn = document.getElementById('plus-btn');
+      const openRewardBtn = document.getElementById('open-reward-btn');
+      const rewardBtnLabelEl = document.getElementById('reward-btn-label');
+      const resetBtn = document.getElementById('reset-btn');
+
+      const toastBannerEl = document.getElementById('toast-banner');
+      const toastIconEl = document.getElementById('toast-icon');
+      const toastMsgEl = document.getElementById('toast-msg');
+      const confettiContainerEl = document.getElementById('confetti-container');
+
+      const customModalEl = document.getElementById('custom-modal');
+      const modalEmojiEl = document.getElementById('modal-emoji');
+      const modalTitleEl = document.getElementById('modal-title');
+      const modalDescEl = document.getElementById('modal-desc');
+      const modalInputEl = document.getElementById('modal-input');
+      const modalCancelBtn = document.getElementById('modal-cancel');
+      const modalConfirmBtn = document.getElementById('modal-confirm');
+
+      const rewardModalEl = document.getElementById('reward-modal');
+      const closeRewardModalBtn = document.getElementById('close-reward-modal');
+      const rewardStatusSubEl = document.getElementById('reward-status-sub');
+      const rewardContentTextEl = document.getElementById('reward-content-text');
+      const editRewardTextBtn = document.getElementById('edit-reward-text-btn');
+      const redeemedStampEl = document.getElementById('redeemed-stamp');
+      const redeemedDateTextEl = document.getElementById('redeemed-date-text');
+      const redeemNowBtn = document.getElementById('redeem-now-btn');
+
+      const syncModalEl = document.getElementById('sync-modal');
+      const closeSyncModalBtn = document.getElementById('close-sync-modal');
+      const modalCurrentCodeEl = document.getElementById('modal-current-code');
+      const copyCodeBtn = document.getElementById('copy-code-btn');
+      const copyLinkBtn = document.getElementById('copy-link-btn');
+      const joinCodeInputEl = document.getElementById('join-code-input');
+      const joinCodeBtn = document.getElementById('join-code-btn');
+      const createNewRoomBtn = document.getElementById('create-new-room-btn');
+
+      /**
+       * 顯示頂部圓角提示訊息
+       */
+      function showToast(icon, message) {
+        toastIconEl.textContent = icon;
+        toastMsgEl.textContent = message;
+        toastBannerEl.classList.remove('opacity-0', '-translate-y-4');
+        toastBannerEl.classList.add('opacity-100', 'translate-y-0');
+
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toastBannerEl.classList.remove('opacity-100', 'translate-y-0');
+          toastBannerEl.classList.add('opacity-0', '-translate-y-4');
+        }, 2800);
+      }
+
+      /**
+       * 更新頂部雲端連線狀態顯示
+       */
+      function setSyncStatus(mode, text) {
+        syncStatusTextEl.textContent = text;
+        syncDotEl.className = 'w-2.5 h-2.5 rounded-full shrink-0';
+        if (mode === 'connected') {
+          syncDotEl.classList.add('bg-emerald-400');
+        } else if (mode === 'syncing') {
+          syncDotEl.classList.add('bg-amber-400', 'animate-pulse');
+        } else {
+          syncDotEl.classList.add('bg-pink-400');
+        }
+      }
+
+      /**
+       * 觸發彼安諾與大耳狗開心跳躍歡呼動畫
+       */
+      function triggerCharacterCheer(withToast = false) {
+        if (pianoActorEl) {
+          pianoActorEl.classList.remove('character-jump');
+          void pianoActorEl.offsetWidth;
+          pianoActorEl.classList.add('character-jump');
+          setTimeout(() => pianoActorEl.classList.remove('character-jump'), 600);
+        }
+        if (cinnaActorEl) {
+          setTimeout(() => {
+            cinnaActorEl.classList.remove('character-jump');
+            void cinnaActorEl.offsetWidth;
+            cinnaActorEl.classList.add('character-jump');
+            setTimeout(() => cinnaActorEl.classList.remove('character-jump'), 600);
+          }, 90);
+        }
+
+        if (withToast) {
+          const cheerLines = [
+            '彼安諾害羞地揮揮小羊手～咩♡',
+            '大耳狗拍拍長耳朵飛起來啦！☁️',
+            '彼安諾 & 大耳狗一起為你加油！🎀',
+            '好棒喔～繼續收集可愛蝴蝶結吧！✨'
+          ];
+          const randomLine = cheerLines[Math.floor(Math.random() * cheerLines.length)];
+          showToast('💕', randomLine);
+        }
+      }
+
+      /**
+       * 華麗三麗鷗夢幻蓋章魔法特效（雙層擴散光圈 + 放射愛心星芒 + +1♡漂浮小氣泡）
+       */
+      function triggerStampMagicEffect(cellEl, isCinnamoroll, isMilestone) {
+        if (!cellEl) return;
+        const rect = cellEl.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        // 1. 雙層魔法光圈擴散
+        const haloColor = isMilestone
+          ? 'rgba(245, 194, 66, 0.85)'
+          : isCinnamoroll
+          ? 'rgba(116, 198, 247, 0.85)'
+          : 'rgba(255, 118, 173, 0.85)';
+
+        for (let h = 0; h < 2; h++) {
+          const halo = document.createElement('div');
+          halo.className = 'stamp-halo-ring';
+          halo.style.border = `3px solid ${haloColor}`;
+          halo.style.boxShadow = `0 0 14px ${haloColor}`;
+          halo.style.animationDelay = `${h * 0.14}s`;
+          cellEl.appendChild(halo);
+          setTimeout(() => halo.remove(), 850);
+        }
+
+        // 2. 漂浮「+1 ♡」糖果小氣泡
+        const badge = document.createElement('div');
+        badge.className = 'stamp-float-badge';
+        badge.textContent = isMilestone ? '✨ 達成里程碑！' : '+1 ♡';
+        badge.style.left = `${centerX}px`;
+        badge.style.top = `${rect.top + 4}px`;
+        document.body.appendChild(badge);
+        setTimeout(() => badge.remove(), 900);
+
+        // 3. 放射愛心、星芒與蝴蝶結粒子噴發
+        const symbols = isMilestone
+          ? ['👑', '💖', '✨', '🎀', '🌟', '🌸', '☁️']
+          : isCinnamoroll
+          ? ['🩵', '☁️', '✨', '🎀', '💫', '🫧']
+          : ['🩷', '🌸', '✨', '🎀', '💕', '🍓'];
+
+        const particleCount = isMilestone ? 16 : 11;
+        for (let p = 0; p < particleCount; p++) {
+          const particle = document.createElement('span');
+          particle.className = 'stamp-particle';
+          particle.textContent = symbols[p % symbols.length];
+
+          const angle = (Math.PI * 2 * p) / particleCount + (Math.random() * 0.4 - 0.2);
+          const distance = (isMilestone ? 52 : 38) + Math.random() * 26;
+          const tx = Math.cos(angle) * distance;
+          const ty = Math.sin(angle) * distance - 8;
+          const rot = Math.floor(Math.random() * 180 - 90);
+
+          particle.style.left = `${centerX}px`;
+          particle.style.top = `${centerY}px`;
+          particle.style.fontSize = `${(isMilestone ? 15 : 13) + Math.random() * 5}px`;
+          particle.style.setProperty('--tx', `${tx.toFixed(1)}px`);
+          particle.style.setProperty('--ty', `${ty.toFixed(1)}px`);
+          particle.style.setProperty('--rot', `${rot}deg`);
+
+          document.body.appendChild(particle);
+          setTimeout(() => particle.remove(), 820);
+        }
+      }
+
+      /**
+       * 產生日系精品絲緞珍珠蝴蝶結 SVG
+       */
+      function createRibbonBowSVG(isStamped, isCinnamoroll, isMilestone) {
+        if (!isStamped) {
+          return `
+            <svg class="w-8 h-8 sm:w-9 sm:h-9 opacity-45" viewBox="0 0 64 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M26 27L15 44L22 41L27 46L31 30" stroke="#E89AB8" stroke-width="1.8" stroke-dasharray="3 2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M38 27L49 44L42 41L37 46L33 30" stroke="#E89AB8" stroke-width="1.8" stroke-dasharray="3 2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M28 21C19 10 6 12 6 23C6 33 19 35 28 26" fill="#FFF8FB" stroke="#E89AB8" stroke-width="1.8" stroke-dasharray="3 2.5"/>
+              <path d="M36 21C45 10 58 12 58 23C58 33 45 35 36 26" fill="#FFF8FB" stroke="#E89AB8" stroke-width="1.8" stroke-dasharray="3 2.5"/>
+              <rect x="27" y="18" width="10" height="11" rx="4.5" fill="#FFF8FB" stroke="#E89AB8" stroke-width="1.8" stroke-dasharray="2.5 2"/>
+            </svg>
+          `;
+        }
+
+        const palette = isMilestone
+          ? {
+              wingMain: '#FFE08A',
+              wingDark: '#F2B84B',
+              tailFill: '#FFD269',
+              knotFill: '#FFF5D6',
+              pearlFill: '#FF7AA8',
+              stroke: '#7A564D'
+            }
+          : isCinnamoroll
+          ? {
+              wingMain: '#9AD8FA',
+              wingDark: '#6DBCEB',
+              tailFill: '#87CEF7',
+              knotFill: '#FFFDF9',
+              pearlFill: '#FF85B3',
+              stroke: '#6D544C'
+            }
+          : {
+              wingMain: '#FF9EC2',
+              wingDark: '#F26D9E',
+              tailFill: '#FF8AB6',
+              knotFill: '#FFFDF9',
+              pearlFill: '#87CEF7',
+              stroke: '#6D544C'
+            };
+
+        const crownBadge = isMilestone
+          ? `
+            <path d="M24 11L27 5L32 9L37 5L40 11H24Z" fill="#FFD166" stroke="#7A564D" stroke-width="1.6" stroke-linejoin="round"/>
+          `
+          : '';
+
+        return `
+          <svg class="w-9 h-9 sm:w-10 sm:h-10 bow-shimmer-glow" viewBox="0 0 64 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            ${crownBadge}
+            <!-- 左側燕尾飄帶 -->
+            <path d="M26 27L14 45L21 42L26 47L31 30" fill="${palette.tailFill}" stroke="${palette.stroke}" stroke-width="2" stroke-linejoin="round"/>
+            <!-- 右側燕尾飄帶 -->
+            <path d="M38 27L50 45L43 42L38 47L33 30" fill="${palette.tailFill}" stroke="${palette.stroke}" stroke-width="2" stroke-linejoin="round"/>
+
+            <!-- 左側蓬鬆絲緞耳翼 -->
+            <path d="M28 21C19 9 5 11 5 23C5 34 19 36 28 26Z" fill="${palette.wingMain}" stroke="${palette.stroke}" stroke-width="2.1" stroke-linejoin="round"/>
+            <!-- 右側蓬鬆絲緞耳翼 -->
+            <path d="M36 21C45 9 59 11 59 23C59 34 45 36 36 26Z" fill="${palette.wingMain}" stroke="${palette.stroke}" stroke-width="2.1" stroke-linejoin="round"/>
+
+            <!-- 絲緞摺痕與柔白高光 -->
+            <path d="M13 18C17 16 21 18 24 21" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+            <path d="M51 18C47 16 43 18 40 21" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+            <path d="M16 24H24" stroke="${palette.wingDark}" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M48 24H40" stroke="${palette.wingDark}" stroke-width="1.6" stroke-linecap="round"/>
+
+            <!-- 中央立體結心與小珍珠 -->
+            <rect x="26.5" y="17.5" width="11" height="12" rx="5" fill="${palette.knotFill}" stroke="${palette.stroke}" stroke-width="2.1"/>
+            <circle cx="32" cy="23.5" r="2.7" fill="${palette.pearlFill}" stroke="${palette.stroke}" stroke-width="1.3"/>
+          </svg>
+        `;
+      }
+
+      /**
+       * 清除進行中的依序蓋章演出計時器
+       */
+      function clearReplayTimers() {
+        replayTimers.forEach((id) => clearTimeout(id));
+        replayTimers = [];
+      }
+
+      /**
+       * 每次打開頁面或載入雲端進度時，從第 1 格依序重播蓋章動畫與華麗特效到目前點數
+       */
+      function playSequentialStampReplay(targetPoints) {
+        clearReplayTimers();
+        const total = Math.max(0, Math.min(TOTAL_POINTS, targetPoints));
+        if (total <= 0) {
+          renderGrid();
+          updateProgressUI();
+          return;
+        }
+
+        // 先歸零顯示狀態，準備從第 1 格開始依序蓋上
+        renderGrid(-1, 0);
+        updateProgressUI(0);
+
+        const stepDelay = total <= 10 ? 150 : total <= 20 ? 115 : 90;
+
+        for (let step = 1; step <= total; step++) {
+          const timerId = setTimeout(() => {
+            renderGrid(step, step);
+            updateProgressUI(step);
+
+            // 每 5 點或最後一點時讓彼安諾與大耳狗開心跳躍歡呼
+            if (step === 1 || step % 5 === 0 || step === total) {
+              triggerCharacterCheer(false);
+            }
+
+            if (step === total) {
+              if (total === TOTAL_POINTS && !celebrated30) {
+                celebrated30 = true;
+                triggerConfetti();
+              }
+            }
+          }, step * stepDelay);
+          replayTimers.push(timerId);
+        }
+      }
+
+      /**
+       * 更新進度條、百分比、標題與按鈕狀態
+       */
+      function updateProgressUI(overridePoints = null) {
+        const pts = overridePoints !== null ? overridePoints : state.points;
+        const pct = Math.round((pts / TOTAL_POINTS) * 100);
+
+        cardTitleEl.textContent = state.title || defaultState.title;
+        pointsTextEl.innerHTML = `<span>🎀</span> 目前累積：<span class="font-num text-base sm:text-lg font-bold text-[#ff4788]">${pts}</span> / ${TOTAL_POINTS} 點`;
+        percentBadgeEl.textContent = `${pct}%`;
+        progressBarEl.style.width = `${pct}%`;
+
+        rewardBtnLabelEl.textContent = pts >= TOTAL_POINTS
+          ? (state.redeemed ? '💮 已兌換三麗鷗獎勵券' : '🎉 立即兌換三麗鷗獎勵券！')
+          : `查看三麗鷗獎勵券 (${pts}/${TOTAL_POINTS})`;
+
+        if (pts === 0) {
+          encouragementTextEl.textContent = '✨ 點擊下方精緻蝴蝶結或「＋1 點蓋章」開始集點吧！';
+        } else if (pts < 10) {
+          encouragementTextEl.textContent = `🌸 已經收集 ${pts} 個絲緞蝴蝶結囉，繼續加油～`;
+        } else if (pts === 10) {
+          encouragementTextEl.textContent = '👑 達成 10 點里程碑！彼安諾與大耳狗為你拍拍手！';
+        } else if (pts < 20) {
+          encouragementTextEl.textContent = `☁️ 進度突破一半啦！還差 ${TOTAL_POINTS - pts} 點就集滿囉！`;
+        } else if (pts === 20) {
+          encouragementTextEl.textContent = '👑 達成 20 點里程碑！離三麗鷗大獎只剩最後 10 格！';
+        } else if (pts < TOTAL_POINTS) {
+          encouragementTextEl.textContent = `💕 最後衝刺！只差 ${TOTAL_POINTS - pts} 個蝴蝶結就能兌換禮物囉！`;
+        } else {
+          encouragementTextEl.textContent = '🎉 恭喜集滿 30 點！快點開下方獎勵券兌換專屬驚喜吧！';
+        }
+
+        // 更新密碼鎖狀態按鈕
+        if (state.pinCode) {
+          if (isPinUnlockedThisSession) {
+            pinLockIconEl.textContent = '🔓';
+            pinLockLabelEl.textContent = '已解鎖';
+          } else {
+            pinLockIconEl.textContent = '🔒';
+            pinLockLabelEl.textContent = '已上鎖';
+          }
+        } else {
+          pinLockIconEl.textContent = '🔓';
+          pinLockLabelEl.textContent = '未上鎖';
+        }
+
+        // 更新獎勵券彈窗內容
+        rewardContentTextEl.textContent = state.rewardText || defaultState.rewardText;
+        if (pts >= TOTAL_POINTS) {
+          rewardStatusSubEl.textContent = '🎉 恭喜集滿 30 個蝴蝶結！專屬獎勵已解鎖！';
+          if (state.redeemed) {
+            redeemedStampEl.classList.remove('hidden');
+            redeemedDateTextEl.textContent = state.redeemedAt ? `兌換時間：${state.redeemedAt}` : '';
+            redeemNowBtn.disabled = true;
+            redeemNowBtn.textContent = '💮 獎勵已兌換完成';
+          } else {
+            redeemedStampEl.classList.add('hidden');
+            redeemNowBtn.disabled = false;
+            redeemNowBtn.textContent = '🎁 立即確認兌換三麗鷗獎勵！';
+          }
+        } else {
+          redeemedStampEl.classList.add('hidden');
+          rewardStatusSubEl.textContent = `目前進度 ${pts} / ${TOTAL_POINTS} 點，集滿即可兌換喔！`;
+          redeemNowBtn.disabled = true;
+          redeemNowBtn.textContent = `🔒 還差 ${TOTAL_POINTS - pts} 個蝴蝶結解鎖`;
+        }
+      }
+
+      /**
+       * 渲染 30 個正方形圓角外框絲緞蝴蝶結集點格
+       */
+      function renderGrid(animateIndex = -1, overrideDisplayPoints = null) {
+        stampGridEl.innerHTML = '';
+        const activePoints = overrideDisplayPoints !== null ? overrideDisplayPoints : state.points;
+
+        for (let i = 1; i <= TOTAL_POINTS; i++) {
+          const isStamped = i <= activePoints;
+          const isMilestone = i % 10 === 0;
+          const isCinnamoroll = i % 2 === 0;
+
+          const cell = document.createElement('button');
+          cell.type = 'button';
+          cell.setAttribute('aria-label', `第 ${i} 點${isStamped ? '（已蓋章）' : '（未蓋章）'}`);
+
+          let stateClass = 'stamp-card-unstamped';
+          if (isStamped) {
+            if (isMilestone) {
+              stateClass = 'stamp-card-stamped-gold';
+            } else if (isCinnamoroll) {
+              stateClass = 'stamp-card-stamped-blue';
+            } else {
+              stateClass = 'stamp-card-stamped-pink';
+            }
+          }
+
+          cell.className = `stamp-card-base ${stateClass} flex flex-col items-center justify-center p-1 cursor-pointer active:scale-90 select-none`;
+
+          const badgeColor = isStamped
+            ? isMilestone
+              ? 'bg-amber-400 text-white'
+              : isCinnamoroll
+              ? 'bg-sky-400 text-white'
+              : 'bg-[#ff699e] text-white'
+            : 'bg-pink-100/80 text-[#c97a96]';
+
+          const bowWrapperClass = i === animateIndex ? 'bow-pop' : '';
+
+          cell.innerHTML = `
+            <span class="font-num absolute top-1 left-1.5 px-1.5 py-0.2 rounded-full text-[9px] sm:text-[10px] font-extrabold leading-tight ${badgeColor}">
+              ${i}
+            </span>
+            <div class="mt-1.5 flex items-center justify-center ${bowWrapperClass}">
+              ${createRibbonBowSVG(isStamped, isCinnamoroll, isMilestone)}
+            </div>
+          `;
+
+          cell.addEventListener('click', () => {
+            requireCreatorPermission(() => {
+              clearReplayTimers();
+              if (i === state.points) {
+                syncPointsUpdate(state.points - 1);
+              } else {
+                syncPointsUpdate(i);
+              }
+            });
+          });
+
+          stampGridEl.appendChild(cell);
+
+          if (i === animateIndex && isStamped) {
+            requestAnimationFrame(() => {
+              triggerStampMagicEffect(cell, isCinnamoroll, isMilestone);
+            });
+          }
+        }
+      }
+
+      /**
+       * 集滿 30 點飄落蝴蝶結與愛心慶祝特效
+       */
+      function triggerConfetti() {
+        const items = ['🎀', '💖', '🌸', '☁️', '✨', '👑', '🍓'];
+        for (let i = 0; i < 36; i++) {
+          const el = document.createElement('span');
+          el.className = 'confetti-item';
+          el.textContent = items[i % items.length];
+          el.style.left = `${Math.random() * 96 + 2}vw`;
+          el.style.fontSize = `${18 + Math.random() * 14}px`;
+          el.style.animationDuration = `${2.2 + Math.random() * 1.8}s`;
+          el.style.animationDelay = `${Math.random() * 0.6}s`;
+          confettiContainerEl.appendChild(el);
+          setTimeout(() => el.remove(), 4600);
+        }
+      }
+
+      /**
+       * 通用輸入／確認彈窗控制器
+       */
+      function openCustomModal({ emoji = '🎀', title, desc, showInput = false, defaultValue = '', inputType = 'text', placeholder = '', maxLength = 28 }) {
+        return new Promise((resolve) => {
+          modalEmojiEl.textContent = emoji;
+          modalTitleEl.textContent = title;
+          modalDescEl.textContent = desc;
+
+          if (showInput) {
+            modalInputEl.classList.remove('hidden');
+            modalInputEl.type = inputType;
+            modalInputEl.value = defaultValue;
+            modalInputEl.placeholder = placeholder;
+            modalInputEl.maxLength = maxLength;
+          } else {
+            modalInputEl.classList.add('hidden');
+          }
+
+          customModalEl.classList.remove('hidden');
+          customModalEl.classList.add('flex');
+
+          if (showInput) {
+            setTimeout(() => modalInputEl.focus(), 60);
+          }
+
+          const cleanup = () => {
+            customModalEl.classList.add('hidden');
+            customModalEl.classList.remove('flex');
+            modalCancelBtn.removeEventListener('click', onCancel);
+            modalConfirmBtn.removeEventListener('click', onConfirm);
+          };
+
+          const onCancel = () => {
+            cleanup();
+            resolve(null);
+          };
+
+          const onConfirm = () => {
+            const val = showInput ? modalInputEl.value.trim() : true;
+            cleanup();
+            resolve(val);
+          };
+
+          modalCancelBtn.addEventListener('click', onCancel);
+          modalConfirmBtn.addEventListener('click', onConfirm);
+        });
+      }
+
+      /**
+       * 發點密碼鎖驗證（若已上鎖則要求輸入 4 位數密碼）
+       */
+      async function requireCreatorPermission(actionCallback) {
+        if (!state.pinCode || isPinUnlockedThisSession) {
+          actionCallback();
+          return;
+        }
+
+        const entered = await openCustomModal({
+          emoji: '🔒',
+          title: '輸入發點密碼鎖',
+          desc: '這張集點卡已設定保護密碼，請輸入 4 位數密碼以編輯點數或內容：',
+          showInput: true,
+          inputType: 'password',
+          placeholder: '請輸入 4 位數密碼',
+          maxLength: 8
+        });
+
+        if (entered === null) return;
+        if (entered === state.pinCode) {
+          isPinUnlockedThisSession = true;
+          updateProgressUI();
+          showToast('🔓', '密碼正確！已解鎖發點權限');
+          actionCallback();
+        } else {
+          showToast('❌', '密碼不正確喔，請再試一次！');
+        }
+      }
+
+      /**
+       * 本機儲存讀寫備援
+       */
+      function saveLocalBackup(roomCode, data) {
+        try {
+          localStorage.setItem(`${STORAGE_PREFIX}room_${roomCode}`, JSON.stringify(data));
+          localStorage.setItem(`${STORAGE_PREFIX}last_room`, roomCode);
+        } catch (e) {
+          // 忽略無痕模式儲存限制
+        }
+      }
+
+      function loadLocalBackup(roomCode) {
+        try {
+          const raw = localStorage.getItem(`${STORAGE_PREFIX}room_${roomCode}`);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) {
+          return null;
+        }
+      }
+
+      /**
+       * 同步寫入雲端與本機
+       */
+      async function saveToCloud(patch) {
+        state = {
+          ...state,
+          ...patch,
+          updatedAt: Date.now(),
+          updatedBy: deviceId
+        };
+        saveLocalBackup(currentRoomCode, state);
+
+        if (syncMode === 'firebase' && currentUser && db) {
+          try {
+            const roomRef = doc(db, 'artifacts', appId, 'public', 'data', 'piano_reward_cards', currentRoomCode);
+            await setDoc(roomRef, state);
+            return;
+          } catch (e) {
+            console.warn('Firestore 寫入切換至 REST 備援:', e);
+            syncMode = 'rest';
+          }
+        }
+
+        try {
+          await fetch(`${PUBLIC_KV_ENDPOINT}/${encodeURIComponent(currentRoomCode)}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(state)
+          });
+        } catch (e) {
+          // 離線時仍已完整保存於 localStorage
+        }
+      }
+
+      /**
+       * 套用遠端傳回的最新狀態
+       */
+      function applyRemoteState(incomingData) {
+        const merged = { ...defaultState, ...incomingData };
+        const isFirstSyncForRoom = !hasPlayedInitialReplay;
+        if (merged.updatedAt <= state.updatedAt && !isFirstSyncForRoom) return;
+
+        const isRemoteChange = merged.updatedBy && merged.updatedBy !== deviceId;
+        const prevPoints = state.points;
+
+        state = merged;
+        saveLocalBackup(currentRoomCode, state);
+
+        // 若是剛打開頁面首次載入雲端進度，則從第 1 格重播到最新點數
+        if (isFirstSyncForRoom) {
+          hasPlayedInitialReplay = true;
+          if (state.points > 0) {
+            playSequentialStampReplay(state.points);
+          } else {
+            renderGrid();
+            updateProgressUI();
+          }
+          return;
+        }
+
+        const animateIdx = state.points > prevPoints ? state.points : -1;
+        renderGrid(animateIdx);
+        updateProgressUI();
+
+        if (isRemoteChange) {
+          if (state.points > prevPoints) {
+            triggerCharacterCheer(false);
+            showToast('🎀', `對方幫集點卡蓋章了！目前 ${state.points} / ${TOTAL_POINTS} 點`);
+            if (state.points === TOTAL_POINTS && !celebrated30) {
+              celebrated30 = true;
+              triggerConfetti();
+            }
+          } else {
+            showToast('☁️', '已同步對方的最新更新！');
+          }
+        }
+      }
+
+      /**
+       * 更新點數並觸發角色歡呼與華麗特效
+       */
+      async function syncPointsUpdate(newPoints) {
+        clearReplayTimers();
+        const clamped = Math.max(0, Math.min(TOTAL_POINTS, newPoints));
+        const prevPoints = state.points;
+        if (clamped === prevPoints) return;
+
+        const isAdding = clamped > prevPoints;
+        const animateIdx = isAdding ? clamped : -1;
+
+        state.points = clamped;
+        if (clamped < TOTAL_POINTS) {
+          state.redeemed = false;
+          state.redeemedAt = null;
+          celebrated30 = false;
+        }
+
+        renderGrid(animateIdx);
+        updateProgressUI();
+
+        if (isAdding) {
+          triggerCharacterCheer(false);
+          if (clamped === 10 || clamped === 20) {
+            showToast('👑', `達成 ${clamped} 點里程碑！彼安諾與大耳狗為你歡呼！`);
+          } else if (clamped === TOTAL_POINTS && !celebrated30) {
+            celebrated30 = true;
+            triggerConfetti();
+            showToast('🎉', '集滿 30 點啦！快打開獎勵券兌換三麗鷗驚喜！');
+          }
+        }
+
+        await saveToCloud({
+          points: state.points,
+          redeemed: state.redeemed,
+          redeemedAt: state.redeemedAt
+        });
+      }
+
+      /**
+       * 代碼正規化與網址同步
+       */
+      function normalizeRoomCode(raw) {
+        const cleaned = (raw || '').toUpperCase().replace(/[^A-Z0-9-]/g, '').trim();
+        return cleaned || '';
+      }
+
+      function generateRandomRoomCode() {
+        const num = Math.floor(1000 + Math.random() * 9000);
+        return `PIANO-${num}`;
+      }
+
+      function updateUrlRoomCode(code) {
+        roomCodeDisplayEl.textContent = code;
+        modalCurrentCodeEl.textContent = code;
+        try {
+          const url = new URL(window.location.href);
+          url.searchParams.set('card', code);
+          window.history.replaceState({}, '', url.toString());
+        } catch (e) {
+          // 忽略受限 iFrame 歷史紀錄限制
+        }
+      }
+
+      /**
+       * 外部靜態部署環境用的跨機雲端同步輪詢
+       */
+      function startRestSyncLoop(roomCode) {
+        const fetchRemote = async (isInitial = false) => {
+          try {
+            const res = await fetch(`${PUBLIC_KV_ENDPOINT}/${encodeURIComponent(roomCode)}?_t=${Date.now()}`);
+            if (res.ok) {
+              const remoteData = await res.json();
+              if (remoteData && typeof remoteData === 'object') {
+                applyRemoteState(remoteData);
+              } else if (isInitial && !hasPlayedInitialReplay) {
+                hasPlayedInitialReplay = true;
+                if (state.points > 0) playSequentialStampReplay(state.points);
+              }
+              setSyncStatus('connected', '● 雙人雲端已連線・跨機同步中');
+            } else if (res.status === 404 && isInitial) {
+              hasPlayedInitialReplay = true;
+              if (state.points > 0) playSequentialStampReplay(state.points);
+              await saveToCloud({});
+              setSyncStatus('connected', '● 雙人雲端已建立・可分享代碼');
+            }
+          } catch (e) {
+            if (isInitial) {
+              if (!hasPlayedInitialReplay) {
+                hasPlayedInitialReplay = true;
+                if (state.points > 0) playSequentialStampReplay(state.points);
+              }
+              setSyncStatus('local', '● 本機已自動保存進度');
+            }
+          }
+        };
+
+        fetchRemote(true);
+        pollTimer = setInterval(() => fetchRemote(false), 3500);
+      }
+
+      /**
+       * 連線至指定代碼的集點卡
+       */
+      async function connectToRoom(roomCode, isSwitching = false) {
+        const normalized = normalizeRoomCode(roomCode);
+        if (!normalized) return;
+
+        clearReplayTimers();
+        hasPlayedInitialReplay = false;
+
+        if (unsubscribeRoom) {
+          unsubscribeRoom();
+          unsubscribeRoom = null;
+        }
+        if (pollTimer) {
+          clearInterval(pollTimer);
+          pollTimer = null;
+        }
+
+        currentRoomCode = normalized;
+        isPinUnlockedThisSession = false;
+        celebrated30 = false;
+        updateUrlRoomCode(currentRoomCode);
+
+        const localData = loadLocalBackup(currentRoomCode);
+        state = localData ? { ...defaultState, ...localData } : { ...defaultState };
+        renderGrid();
+        updateProgressUI();
+
+        if (isSwitching) {
+          showToast('☁️', `已切換至集點卡「${currentRoomCode}」！`);
+        }
+
+        if (syncMode === 'firebase' && currentUser && db) {
+          setSyncStatus('syncing', '☁️ 正在載入雲端卡片...');
+          const roomRef = doc(db, 'artifacts', appId, 'public', 'data', 'piano_reward_cards', currentRoomCode);
+
+          try {
+            const snap = await getDoc(roomRef);
+            if (!snap.exists()) {
+              const initialDoc = {
+                ...state,
+                updatedAt: Date.now(),
+                updatedBy: deviceId
+              };
+              await setDoc(roomRef, initialDoc);
+            } else {
+              state = { ...defaultState, ...snap.data() };
+              saveLocalBackup(currentRoomCode, state);
+            }
+
+            hasPlayedInitialReplay = true;
+            if (state.points > 0) {
+              playSequentialStampReplay(state.points);
+            } else {
+              renderGrid();
+              updateProgressUI();
+            }
+
+            unsubscribeRoom = onSnapshot(
+              roomRef,
+              (docSnap) => {
+                if (!docSnap.exists()) return;
+                applyRemoteState(docSnap.data());
+                setSyncStatus('connected', '● 雲端已連線・即時同步中');
+              },
+              (err) => {
+                console.warn('Firestore 監聽切換至 REST 同步:', err);
+                syncMode = 'rest';
+                startRestSyncLoop(currentRoomCode);
+              }
+            );
+            return;
+          } catch (err) {
+            console.warn('Firebase 連線異常，自動切換至免設定雲端同步:', err);
+            syncMode = 'rest';
+          }
+        }
+
+        syncMode = 'rest';
+        startRestSyncLoop(currentRoomCode);
+      }
+
+      /**
+       * 可靠的剪貼簿複製函式（相容 iFrame 與手機瀏覽器）
+       */
+      function copyTextReliable(text, successMsg) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+
+        let copied = false;
+        try {
+          copied = document.execCommand('copy');
+        } catch (err) {
+          copied = false;
+        }
+        document.body.removeChild(textarea);
+
+        if (copied) {
+          showToast('📋', successMsg);
+        } else if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text)
+            .then(() => showToast('📋', successMsg))
+            .catch(() => showToast('💡', `請手動複製代碼：${text}`));
+        } else {
+          showToast('💡', `請手動複製代碼：${text}`);
+        }
+      }
+
+      // ================= 綁定所有按鈕與互動事件 =================
+
+      // 點擊角色舞台互動跳躍
+      interactiveStageEl.addEventListener('click', () => {
+        triggerCharacterCheer(true);
+      });
+
+      // ＋1 點蓋章
+      plusBtn.addEventListener('click', () => {
+        requireCreatorPermission(() => {
+          if (state.points >= TOTAL_POINTS) {
+            showToast('🎉', '已經集滿 30 個蝴蝶結囉！快打開獎勵券吧！');
+            return;
+          }
+          syncPointsUpdate(state.points + 1);
+        });
+      });
+
+      // －1 扣點
+      minusBtn.addEventListener('click', () => {
+        requireCreatorPermission(() => {
+          if (state.points <= 0) {
+            showToast('🌸', '目前已經是 0 點囉！');
+            return;
+          }
+          syncPointsUpdate(state.points - 1);
+        });
+      });
+
+      // 歸零重來
+      resetBtn.addEventListener('click', () => {
+        requireCreatorPermission(async () => {
+          const confirmed = await openCustomModal({
+            emoji: '↺',
+            title: '確定要將點數歸零嗎？',
+            desc: '歸零後 30 個蝴蝶結印章與兌換狀態都會重新開始計算喔！',
+            showInput: false
+          });
+          if (confirmed) {
+            await syncPointsUpdate(0);
+            showToast('✨', '已將集點卡歸零重新開始！');
+          }
+        });
+      });
+
+      // 修改集點卡主標題
+      const handleEditTitle = () => {
+        requireCreatorPermission(async () => {
+          const newTitle = await openCustomModal({
+            emoji: '✏️',
+            title: '修改集點卡標題',
+            desc: '輸入你們專屬的可愛集點卡名稱（最多 24 字）：',
+            showInput: true,
+            defaultValue: state.title,
+            placeholder: '例如：寶貝的彼安諾集點卡',
+            maxLength: 24
+          });
+          if (newTitle) {
+            state.title = newTitle;
+            updateProgressUI();
+            await saveToCloud({ title: newTitle });
+            showToast('🎀', '已更新集點卡標題！');
+          }
+        });
+      };
+      cardTitleEl.addEventListener('click', handleEditTitle);
+      editTitleBtn.addEventListener('click', handleEditTitle);
+
+      // 發點密碼鎖設定／解除
+      pinLockBtn.addEventListener('click', async () => {
+        if (!state.pinCode) {
+          const newPin = await openCustomModal({
+            emoji: '🔐',
+            title: '設定 4 位數發點密碼鎖',
+            desc: '設定後只有知道密碼的人才能蓋章與修改內容，另一半仍可查看進度與兌換獎勵：',
+            showInput: true,
+            inputType: 'tel',
+            placeholder: '請輸入 4 位數字（例如 1314）',
+            maxLength: 4
+          });
+          if (!newPin) return;
+          if (!/^\d{4}$/.test(newPin)) {
+            showToast('⚠️', '請輸入 4 位純數字密碼喔！');
+            return;
+          }
+          state.pinCode = newPin;
+          isPinUnlockedThisSession = true;
+          updateProgressUI();
+          await saveToCloud({ pinCode: newPin });
+          showToast('🔒', '已開啟 4 位數發點密碼保護！');
+        } else {
+          requireCreatorPermission(async () => {
+            const removeConfirm = await openCustomModal({
+              emoji: '🔓',
+              title: '要解除發點密碼鎖嗎？',
+              desc: '解除後任何人打開連結都能直接幫忙蓋章喔！',
+              showInput: false
+            });
+            if (removeConfirm) {
+              state.pinCode = '';
+              isPinUnlockedThisSession = false;
+              updateProgressUI();
+              await saveToCloud({ pinCode: '' });
+              showToast('🔓', '已解除發點密碼鎖！');
+            }
+          });
+        }
+      });
+
+      // 獎勵兌換券彈窗操作
+      openRewardBtn.addEventListener('click', () => {
+        updateProgressUI();
+        rewardModalEl.classList.remove('hidden');
+        rewardModalEl.classList.add('flex');
+      });
+
+      closeRewardModalBtn.addEventListener('click', () => {
+        rewardModalEl.classList.add('hidden');
+        rewardModalEl.classList.remove('flex');
+      });
+
+      editRewardTextBtn.addEventListener('click', () => {
+        requireCreatorPermission(async () => {
+          const updatedReward = await openCustomModal({
+            emoji: '🎁',
+            title: '自訂三麗鷗獎勵內容',
+            desc: '寫下集滿 30 點後要送給對方的專屬驚喜禮物：',
+            showInput: true,
+            defaultValue: state.rewardText,
+            placeholder: '例如：大耳狗娃娃一隻＋請吃大餐',
+            maxLength: 36
+          });
+          if (updatedReward) {
+            state.rewardText = updatedReward;
+            updateProgressUI();
+            await saveToCloud({ rewardText: updatedReward });
+            showToast('🎁', '已更新三麗鷗獎勵內容！');
+          }
+        });
+      });
+
+      redeemNowBtn.addEventListener('click', async () => {
+        if (state.points < TOTAL_POINTS || state.redeemed) return;
+        const confirmRedeem = await openCustomModal({
+          emoji: '🎉',
+          title: '確認兌換三麗鷗獎勵？',
+          desc: '按下確定後會蓋上「已兌換完成」與日期時間印章，可以截圖傳給對方兌現喔！',
+          showInput: false
+        });
+        if (confirmRedeem) {
+          const now = new Date();
+          const formattedDate = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+          state.redeemed = true;
+          state.redeemedAt = formattedDate;
+          updateProgressUI();
+          triggerConfetti();
+          await saveToCloud({ redeemed: true, redeemedAt: formattedDate });
+          showToast('💮', '恭喜兌換成功！快截圖保存這份甜蜜吧！');
+        }
+      });
+
+      // 雙人雲端同步與分享視窗操作
+      openSyncBtn.addEventListener('click', () => {
+        modalCurrentCodeEl.textContent = currentRoomCode;
+        joinCodeInputEl.value = '';
+        syncModalEl.classList.remove('hidden');
+        syncModalEl.classList.add('flex');
+      });
+
+      closeSyncModalBtn.addEventListener('click', () => {
+        syncModalEl.classList.add('hidden');
+        syncModalEl.classList.remove('flex');
+      });
+
+      copyCodeBtn.addEventListener('click', () => {
+        copyTextReliable(currentRoomCode, `已複製卡片代碼：${currentRoomCode}`);
+      });
+
+      copyLinkBtn.addEventListener('click', () => {
+        let shareUrl = window.location.href;
+        try {
+          const u = new URL(window.location.href);
+          u.searchParams.set('card', currentRoomCode);
+          shareUrl = u.toString();
+        } catch (e) {
+          shareUrl = `${window.location.origin}${window.location.pathname}?card=${currentRoomCode}`;
+        }
+        copyTextReliable(shareUrl, '已複製專屬分享連結！快貼給對方吧 ♡');
+      });
+
+      joinCodeBtn.addEventListener('click', async () => {
+        const targetCode = normalizeRoomCode(joinCodeInputEl.value);
+        if (!targetCode) {
+          showToast('⚠️', '請先輸入對方的集點卡代碼喔！');
+          return;
+        }
+        syncModalEl.classList.add('hidden');
+        syncModalEl.classList.remove('flex');
+        await connectToRoom(targetCode, true);
+      });
+
+      createNewRoomBtn.addEventListener('click', async () => {
+        const freshCode = generateRandomRoomCode();
+        syncModalEl.classList.add('hidden');
+        syncModalEl.classList.remove('flex');
+        await connectToRoom(freshCode, true);
+      });
+
+      // ================= 初始化啟動流程 =================
+      if (firebaseConfig && firebaseConfig.apiKey) {
+        try {
+          const app = initializeApp(firebaseConfig);
+          auth = getAuth(app);
+          db = getFirestore(app);
+          if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+            await signInWithCustomToken(auth, __initial_auth_token);
+          } else {
+            await signInAnonymously(auth);
+          }
+          currentUser = auth.currentUser;
+          syncMode = 'firebase';
+        } catch (err) {
+          console.warn('Firebase 初始化略過，使用免設定雲端同步:', err);
+          syncMode = 'rest';
+        }
+      } else {
+        syncMode = 'rest';
+      }
+
+      // 優先讀取網址參數 ?card=XXXX，其次讀取上次使用的代碼，否則產生新代碼
+      let initialCode = '';
+      try {
+        const params = new URLSearchParams(window.location.search);
+        initialCode = normalizeRoomCode(params.get('card'));
+      } catch (e) {
+        initialCode = '';
+      }
+
+      if (!initialCode) {
+        try {
+          initialCode = normalizeRoomCode(localStorage.getItem(`${STORAGE_PREFIX}last_room`));
+        } catch (e) {
+          initialCode = '';
+        }
+      }
+
+      if (!initialCode) {
+        initialCode = generateRandomRoomCode();
+      }
+
+      await connectToRoom(initialCode, false);
+    })();
+  </script>
+</body>
+</html>
