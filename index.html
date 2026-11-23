@@ -809,7 +809,7 @@
       <div class="text-center mb-3">
         <div class="text-3xl mb-1">☁️🎀</div>
         <h2 class="text-lg font-extrabold text-[#5c4038]">雙人雲端即時同步</h2>
-        <p class="text-xs font-bold text-[#9c6679] mt-0.5">把專屬代碼或連結傳給對方，兩人手機就能即時看到最新點數！</p>
+        <p class="text-xs font-bold text-[#9c6679] mt-0.5">換瀏覽器或傳給對方時，使用同一個「卡片代碼」或「分享連結」就能看到一樣的點數！</p>
       </div>
 
       <!-- 目前卡片代碼區 -->
@@ -830,12 +830,12 @@
 
       <!-- 輸入對方代碼連線區 -->
       <div class="rounded-2xl bg-sky-50/70 border border-sky-200 p-3 mb-3">
-        <p class="text-[11px] font-bold text-[#4b7496] mb-1.5">輸入對方的代碼以連線同一張卡：</p>
+        <p class="text-[11px] font-bold text-[#4b7496] mb-1.5">在其他瀏覽器或裝置輸入同一個代碼：</p>
         <div class="flex gap-2">
           <input
             id="join-code-input"
             type="text"
-            maxlength="12"
+            maxlength="14"
             placeholder="例如：PIANO-8821"
             class="font-num flex-1 px-3 py-2 rounded-xl border-2 border-pink-200 focus:border-[#ff699e] focus:outline-none text-base font-bold uppercase text-center text-[#5c4038] bg-white"
           />
@@ -851,19 +851,19 @@
     </div>
   </div>
 
-  <!-- 雙模即時雲端同步（Firebase 自動偵測 + 外部靜態部署免設定雲端備援 + 本機儲存） -->
+  <!-- 雙模即時雲端同步（Firebase 自動偵測 + 可靠跨瀏覽器雲端儲存備援 + 本機儲存） -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     /**
-     * 彼安諾 & 大耳狗 30點專屬集點卡（動態角色互動＋華麗蓋章重播＋雲端同步完整版）
+     * 彼安諾 & 大耳狗 30點專屬集點卡（跨瀏覽器／跨裝置雲端同步強化版）
      */
     (async function () {
       const TOTAL_POINTS = 30;
-      const STORAGE_PREFIX = 'piano_cinna_card_v5_';
-      const PUBLIC_KV_ENDPOINT = 'https://kvdb.io/A9x7kP2mQ8wR4nL6vB3zT1';
+      const STORAGE_PREFIX = 'piano_cinna_card_v6_';
+      const CLOUD_API_BASE = 'https://api.restful-api.dev/objects';
       const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
       let firebaseConfig = null;
@@ -884,6 +884,7 @@
         redeemed: false,
         redeemedAt: null,
         pinCode: '',
+        cloudObjectId: '',
         updatedAt: 0,
         updatedBy: ''
       };
@@ -914,6 +915,7 @@
       let celebrated30 = false;
       let replayTimers = [];
       let hasPlayedInitialReplay = false;
+      let isWritingCloud = false;
 
       // 取得所有 DOM 元素
       const syncDotEl = document.getElementById('sync-dot');
@@ -1036,7 +1038,7 @@
       }
 
       /**
-       * 華麗三麗鷗夢幻蓋章魔法特效（雙層擴散光圈 + 放射愛心星芒 + +1♡漂浮小氣泡）
+       * 華麗三麗鷗夢幻蓋章魔法特效
        */
       function triggerStampMagicEffect(cellEl, isCinnamoroll, isMilestone) {
         if (!cellEl) return;
@@ -1044,7 +1046,6 @@
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
 
-        // 1. 雙層魔法光圈擴散
         const haloColor = isMilestone
           ? 'rgba(245, 194, 66, 0.85)'
           : isCinnamoroll
@@ -1061,7 +1062,6 @@
           setTimeout(() => halo.remove(), 850);
         }
 
-        // 2. 漂浮「+1 ♡」糖果小氣泡
         const badge = document.createElement('div');
         badge.className = 'stamp-float-badge';
         badge.textContent = isMilestone ? '✨ 達成里程碑！' : '+1 ♡';
@@ -1070,7 +1070,6 @@
         document.body.appendChild(badge);
         setTimeout(() => badge.remove(), 900);
 
-        // 3. 放射愛心、星芒與蝴蝶結粒子噴發
         const symbols = isMilestone
           ? ['👑', '💖', '✨', '🎀', '🌟', '🌸', '☁️']
           : isCinnamoroll
@@ -1153,23 +1152,14 @@
         return `
           <svg class="w-9 h-9 sm:w-10 sm:h-10 bow-shimmer-glow" viewBox="0 0 64 52" fill="none" xmlns="http://www.w3.org/2000/svg">
             ${crownBadge}
-            <!-- 左側燕尾飄帶 -->
             <path d="M26 27L14 45L21 42L26 47L31 30" fill="${palette.tailFill}" stroke="${palette.stroke}" stroke-width="2" stroke-linejoin="round"/>
-            <!-- 右側燕尾飄帶 -->
             <path d="M38 27L50 45L43 42L38 47L33 30" fill="${palette.tailFill}" stroke="${palette.stroke}" stroke-width="2" stroke-linejoin="round"/>
-
-            <!-- 左側蓬鬆絲緞耳翼 -->
             <path d="M28 21C19 9 5 11 5 23C5 34 19 36 28 26Z" fill="${palette.wingMain}" stroke="${palette.stroke}" stroke-width="2.1" stroke-linejoin="round"/>
-            <!-- 右側蓬鬆絲緞耳翼 -->
             <path d="M36 21C45 9 59 11 59 23C59 34 45 36 36 26Z" fill="${palette.wingMain}" stroke="${palette.stroke}" stroke-width="2.1" stroke-linejoin="round"/>
-
-            <!-- 絲緞摺痕與柔白高光 -->
             <path d="M13 18C17 16 21 18 24 21" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
             <path d="M51 18C47 16 43 18 40 21" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
             <path d="M16 24H24" stroke="${palette.wingDark}" stroke-width="1.6" stroke-linecap="round"/>
             <path d="M48 24H40" stroke="${palette.wingDark}" stroke-width="1.6" stroke-linecap="round"/>
-
-            <!-- 中央立體結心與小珍珠 -->
             <rect x="26.5" y="17.5" width="11" height="12" rx="5" fill="${palette.knotFill}" stroke="${palette.stroke}" stroke-width="2.1"/>
             <circle cx="32" cy="23.5" r="2.7" fill="${palette.pearlFill}" stroke="${palette.stroke}" stroke-width="1.3"/>
           </svg>
@@ -1196,7 +1186,6 @@
           return;
         }
 
-        // 先歸零顯示狀態，準備從第 1 格開始依序蓋上
         renderGrid(-1, 0);
         updateProgressUI(0);
 
@@ -1207,7 +1196,6 @@
             renderGrid(step, step);
             updateProgressUI(step);
 
-            // 每 5 點或最後一點時讓彼安諾與大耳狗開心跳躍歡呼
             if (step === 1 || step % 5 === 0 || step === total) {
               triggerCharacterCheer(false);
             }
@@ -1255,7 +1243,6 @@
           encouragementTextEl.textContent = '🎉 恭喜集滿 30 點！快點開下方獎勵券兌換專屬驚喜吧！';
         }
 
-        // 更新密碼鎖狀態按鈕
         if (state.pinCode) {
           if (isPinUnlockedThisSession) {
             pinLockIconEl.textContent = '🔓';
@@ -1269,7 +1256,6 @@
           pinLockLabelEl.textContent = '未上鎖';
         }
 
-        // 更新獎勵券彈窗內容
         rewardContentTextEl.textContent = state.rewardText || defaultState.rewardText;
         if (pts >= TOTAL_POINTS) {
           rewardStatusSubEl.textContent = '🎉 恭喜集滿 30 個蝴蝶結！專屬獎勵已解鎖！';
@@ -1428,7 +1414,7 @@
       }
 
       /**
-       * 發點密碼鎖驗證（若已上鎖則要求輸入 4 位數密碼）
+       * 發點密碼鎖驗證
        */
       async function requireCreatorPermission(actionCallback) {
         if (!state.pinCode || isPinUnlockedThisSession) {
@@ -1479,6 +1465,91 @@
       }
 
       /**
+       * 將目前卡片資料寫入 RESTful-API 雲端物件（支援跨瀏覽器與跨裝置讀取）
+       */
+      async function pushToRestCloud(roomCode, payloadObj) {
+        const cleanPayload = {
+          roomCode,
+          points: payloadObj.points,
+          title: payloadObj.title,
+          rewardText: payloadObj.rewardText,
+          redeemed: payloadObj.redeemed,
+          redeemedAt: payloadObj.redeemedAt,
+          pinCode: payloadObj.pinCode,
+          updatedAt: payloadObj.updatedAt,
+          updatedBy: payloadObj.updatedBy
+        };
+
+        try {
+          if (payloadObj.cloudObjectId) {
+            const putRes = await fetch(`${CLOUD_API_BASE}/${encodeURIComponent(payloadObj.cloudObjectId)}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                name: `SANRIO_CARD_${roomCode}`,
+                data: cleanPayload
+              })
+            });
+            if (putRes.ok) {
+              return payloadObj.cloudObjectId;
+            }
+          }
+
+          const postRes = await fetch(CLOUD_API_BASE, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: `SANRIO_CARD_${roomCode}`,
+              data: cleanPayload
+            })
+          });
+          if (postRes.ok) {
+            const created = await postRes.json();
+            if (created && created.id) {
+              return String(created.id);
+            }
+          }
+        } catch (err) {
+          console.warn('REST 雲端寫入暫時無法連線:', err);
+        }
+        return payloadObj.cloudObjectId || '';
+      }
+
+      /**
+       * 從 RESTful-API 雲端物件清單尋找指定 roomCode 的最新資料
+       */
+      async function pullFromRestCloud(roomCode, preferredObjectId = '') {
+        try {
+          if (preferredObjectId) {
+            const directRes = await fetch(`${CLOUD_API_BASE}/${encodeURIComponent(preferredObjectId)}?_t=${Date.now()}`);
+            if (directRes.ok) {
+              const obj = await directRes.json();
+              if (obj && obj.data && obj.data.roomCode === roomCode) {
+                return { ...obj.data, cloudObjectId: String(obj.id) };
+              }
+            }
+          }
+
+          const listRes = await fetch(`${CLOUD_API_BASE}?_t=${Date.now()}`);
+          if (!listRes.ok) return null;
+          const allObjects = await listRes.json();
+          if (!Array.isArray(allObjects)) return null;
+
+          const matched = allObjects
+            .filter((item) => item && item.data && item.data.roomCode === roomCode)
+            .sort((a, b) => (b.data.updatedAt || 0) - (a.data.updatedAt || 0));
+
+          if (matched.length > 0) {
+            const latest = matched[0];
+            return { ...latest.data, cloudObjectId: String(latest.id) };
+          }
+        } catch (err) {
+          console.warn('REST 雲端讀取暫時無法連線:', err);
+        }
+        return null;
+      }
+
+      /**
        * 同步寫入雲端與本機
        */
       async function saveToCloud(patch) {
@@ -1496,19 +1567,20 @@
             await setDoc(roomRef, state);
             return;
           } catch (e) {
-            console.warn('Firestore 寫入切換至 REST 備援:', e);
+            console.warn('Firestore 寫入切換至跨瀏覽器雲端備援:', e);
             syncMode = 'rest';
           }
         }
 
+        isWritingCloud = true;
         try {
-          await fetch(`${PUBLIC_KV_ENDPOINT}/${encodeURIComponent(currentRoomCode)}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(state)
-          });
-        } catch (e) {
-          // 離線時仍已完整保存於 localStorage
+          const objId = await pushToRestCloud(currentRoomCode, state);
+          if (objId && objId !== state.cloudObjectId) {
+            state.cloudObjectId = objId;
+            saveLocalBackup(currentRoomCode, state);
+          }
+        } finally {
+          isWritingCloud = false;
         }
       }
 
@@ -1516,17 +1588,24 @@
        * 套用遠端傳回的最新狀態
        */
       function applyRemoteState(incomingData) {
+        if (!incomingData || typeof incomingData !== 'object') return;
         const merged = { ...defaultState, ...incomingData };
         const isFirstSyncForRoom = !hasPlayedInitialReplay;
-        if (merged.updatedAt <= state.updatedAt && !isFirstSyncForRoom) return;
 
-        const isRemoteChange = merged.updatedBy && merged.updatedBy !== deviceId;
+        if (!isFirstSyncForRoom && (merged.updatedAt || 0) <= (state.updatedAt || 0)) {
+          return;
+        }
+
+        const isRemoteChange = merged.updatedBy && merged.updatedBy !== deviceId && !isFirstSyncForRoom;
         const prevPoints = state.points;
 
-        state = merged;
+        state = {
+          ...state,
+          ...merged,
+          cloudObjectId: merged.cloudObjectId || state.cloudObjectId
+        };
         saveLocalBackup(currentRoomCode, state);
 
-        // 若是剛打開頁面首次載入雲端進度，則從第 1 格重播到最新點數
         if (isFirstSyncForRoom) {
           hasPlayedInitialReplay = true;
           if (state.points > 0) {
@@ -1622,35 +1701,39 @@
       }
 
       /**
-       * 外部靜態部署環境用的跨機雲端同步輪詢
+       * 外部跨瀏覽器雲端同步輪詢
        */
       function startRestSyncLoop(roomCode) {
         const fetchRemote = async (isInitial = false) => {
-          try {
-            const res = await fetch(`${PUBLIC_KV_ENDPOINT}/${encodeURIComponent(roomCode)}?_t=${Date.now()}`);
-            if (res.ok) {
-              const remoteData = await res.json();
-              if (remoteData && typeof remoteData === 'object') {
-                applyRemoteState(remoteData);
-              } else if (isInitial && !hasPlayedInitialReplay) {
-                hasPlayedInitialReplay = true;
-                if (state.points > 0) playSequentialStampReplay(state.points);
-              }
-              setSyncStatus('connected', '● 雙人雲端已連線・跨機同步中');
-            } else if (res.status === 404 && isInitial) {
+          if (isWritingCloud && !isInitial) return;
+          setSyncStatus('syncing', '☁️ 正在同步雲端進度...');
+          const remoteData = await pullFromRestCloud(roomCode, state.cloudObjectId);
+
+          if (remoteData) {
+            applyRemoteState(remoteData);
+            setSyncStatus('connected', '● 雲端已連線・跨瀏覽器同步中');
+          } else if (isInitial) {
+            if (!hasPlayedInitialReplay) {
               hasPlayedInitialReplay = true;
-              if (state.points > 0) playSequentialStampReplay(state.points);
-              await saveToCloud({});
-              setSyncStatus('connected', '● 雙人雲端已建立・可分享代碼');
-            }
-          } catch (e) {
-            if (isInitial) {
-              if (!hasPlayedInitialReplay) {
-                hasPlayedInitialReplay = true;
-                if (state.points > 0) playSequentialStampReplay(state.points);
+              if (state.points > 0) {
+                playSequentialStampReplay(state.points);
+              } else {
+                renderGrid();
+                updateProgressUI();
               }
-              setSyncStatus('local', '● 本機已自動保存進度');
             }
+            const objId = await pushToRestCloud(roomCode, {
+              ...state,
+              updatedAt: state.updatedAt || Date.now(),
+              updatedBy: deviceId
+            });
+            if (objId) {
+              state.cloudObjectId = objId;
+              saveLocalBackup(roomCode, state);
+            }
+            setSyncStatus('connected', '● 雲端已建立・可輸入代碼同步');
+          } else {
+            setSyncStatus('connected', '● 雲端已連線・跨瀏覽器同步中');
           }
         };
 
@@ -1688,7 +1771,7 @@
         updateProgressUI();
 
         if (isSwitching) {
-          showToast('☁️', `已切換至集點卡「${currentRoomCode}」！`);
+          showToast('☁️', `已連線至集點卡「${currentRoomCode}」！`);
         }
 
         if (syncMode === 'firebase' && currentUser && db) {
@@ -1725,14 +1808,14 @@
                 setSyncStatus('connected', '● 雲端已連線・即時同步中');
               },
               (err) => {
-                console.warn('Firestore 監聽切換至 REST 同步:', err);
+                console.warn('Firestore 監聽切換至跨瀏覽器雲端同步:', err);
                 syncMode = 'rest';
                 startRestSyncLoop(currentRoomCode);
               }
             );
             return;
           } catch (err) {
-            console.warn('Firebase 連線異常，自動切換至免設定雲端同步:', err);
+            console.warn('Firebase 連線異常，自動切換至跨瀏覽器雲端同步:', err);
             syncMode = 'rest';
           }
         }
@@ -1742,7 +1825,7 @@
       }
 
       /**
-       * 可靠的剪貼簿複製函式（相容 iFrame 與手機瀏覽器）
+       * 可靠的剪貼簿複製函式
        */
       function copyTextReliable(text, successMsg) {
         const textarea = document.createElement('textarea');
@@ -1774,12 +1857,10 @@
 
       // ================= 綁定所有按鈕與互動事件 =================
 
-      // 點擊角色舞台互動跳躍
       interactiveStageEl.addEventListener('click', () => {
         triggerCharacterCheer(true);
       });
 
-      // ＋1 點蓋章
       plusBtn.addEventListener('click', () => {
         requireCreatorPermission(() => {
           if (state.points >= TOTAL_POINTS) {
@@ -1790,7 +1871,6 @@
         });
       });
 
-      // －1 扣點
       minusBtn.addEventListener('click', () => {
         requireCreatorPermission(() => {
           if (state.points <= 0) {
@@ -1801,7 +1881,6 @@
         });
       });
 
-      // 歸零重來
       resetBtn.addEventListener('click', () => {
         requireCreatorPermission(async () => {
           const confirmed = await openCustomModal({
@@ -1817,7 +1896,6 @@
         });
       });
 
-      // 修改集點卡主標題
       const handleEditTitle = () => {
         requireCreatorPermission(async () => {
           const newTitle = await openCustomModal({
@@ -1840,7 +1918,6 @@
       cardTitleEl.addEventListener('click', handleEditTitle);
       editTitleBtn.addEventListener('click', handleEditTitle);
 
-      // 發點密碼鎖設定／解除
       pinLockBtn.addEventListener('click', async () => {
         if (!state.pinCode) {
           const newPin = await openCustomModal({
@@ -1881,7 +1958,6 @@
         }
       });
 
-      // 獎勵兌換券彈窗操作
       openRewardBtn.addEventListener('click', () => {
         updateProgressUI();
         rewardModalEl.classList.remove('hidden');
@@ -1933,7 +2009,6 @@
         }
       });
 
-      // 雙人雲端同步與分享視窗操作
       openSyncBtn.addEventListener('click', () => {
         modalCurrentCodeEl.textContent = currentRoomCode;
         joinCodeInputEl.value = '';
@@ -1994,14 +2069,13 @@
           currentUser = auth.currentUser;
           syncMode = 'firebase';
         } catch (err) {
-          console.warn('Firebase 初始化略過，使用免設定雲端同步:', err);
+          console.warn('Firebase 初始化略過，使用跨瀏覽器雲端同步:', err);
           syncMode = 'rest';
         }
       } else {
         syncMode = 'rest';
       }
 
-      // 優先讀取網址參數 ?card=XXXX，其次讀取上次使用的代碼，否則產生新代碼
       let initialCode = '';
       try {
         const params = new URLSearchParams(window.location.search);
